@@ -1,5 +1,7 @@
 import processing.core.*;
-//gunnar says hi
+
 public class Main {
-//
+    public static void main(String[] args) {
+
+    }
 }
