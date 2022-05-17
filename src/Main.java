@@ -42,6 +42,8 @@ public class Main extends PApplet {
 
     int speed = 8;
 
+    boolean youWin = false;
+
     //Main method to run PApplet stuff
     public static void main(String[] args) {
         String[] mySketch = new String[]{"Main"};
@@ -67,6 +69,12 @@ public class Main extends PApplet {
         }
         if (!youLose) {
             fill(255,0,0);
+            for (int i = 1; i < xPath.size(); i++) {
+                if (xPath.get(i) == appleX && xPath.get(i) == appleY) {
+                    appleX = (int) random(0, width);
+                    appleY = (int) random(0, height);
+                }
+            }
             rect(appleX*blockSize, appleY*blockSize, blockSize, blockSize);
             textAlign(LEFT);
             textSize(25);
