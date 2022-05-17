@@ -13,14 +13,32 @@ public class Main extends PApplet {
     //Array List for the y movements of the snake
     ArrayList<Integer> yPath = new ArrayList<>();
 
+    //Last two allow for left right movement
+    int[] xMovement = {0, 0, 1, -1};
+
+    //First two allow for up down movement
+    int[] yMovement = {1, -1, 0, 0};
+
     //Width of the board
-    int width = 32;
+    int width = 30;
 
     //Height of the board
-    int height = 32;
+    int height = 30;
 
-    //Body size of the snake (probably subject to change)
-    int snakeBodySize = 20;
+    //Direction of snake
+    int direction = 0;
+
+    //Body size of the snake and apple(probably subject to change)
+    int blockSize = 20;
+
+    //x value for apple
+    int appleX = (int) random(0, width);
+
+    //y value for apple
+    int appleY = (int) random(0, height);
+
+    //boolean control for winning/losing
+    boolean youLose = false;
 
     //Main method to run PApplet stuff
     public static void main(String[] args) {
@@ -34,19 +52,60 @@ public class Main extends PApplet {
     //Settings: basically makes the window that we run snake on
     public void settings(){
         size(600,600);
+        xPath.add(0);
+        yPath.add(15);
     }
 
     //Draw: makes all of the visual changes
     public void draw(){
-        background(64);
+        background(0);
+        fill(102, 255, 0);
         for (int i = 0; i < xPath.size(); i++) {
-
+            rect(xPath.get(i)*blockSize, yPath.get(i)*blockSize, blockSize,blockSize);
+        }
+        if (!youLose) {
+            fill(255,0,0);
+            rect(appleX*blockSize, appleY*blockSize, blockSize, blockSize);
+            textAlign(LEFT);
+            textSize(25);
+            fill(0,0,255);
+            text("Score: " + xPath.size(), 10, 10, width + 100, 50);
+            if (frameCount%10 == 0) {
+                xPath.add(0, xPath.get(0) + xMovement[direction]);
+                yPath.add(0, yPath.get(0) + yMovement[direction]);
+                if (xPath.get(0) == appleX && yPath.get(0) == appleY) {
+                    appleX = (int) random(0,width);
+                    appleY = (int) random(0, height);
+                }
+                else {
+                    xPath.remove(xPath.size()-1);
+                    yPath.remove(yPath.size()-1);
+                }
+            }
         }
     }
 
-    //KeyPressed: User interface?
+    //KeyPressed: User interface
     public void keyPressed() {
-
+        int newDirection;
+        if (keyCode == DOWN) {
+            newDirection = 0;
+        }
+        else if (keyCode == UP) {
+            newDirection = 1;
+        }
+        else if (keyCode == RIGHT) {
+            newDirection = 2;
+        }
+        else if (keyCode == LEFT) {
+            newDirection = 3;
+        }
+        else {
+            newDirection = -1;
+        }
+        if (newDirection != -1) {
+            direction = newDirection;
+        }
     }
 }
 
