@@ -108,7 +108,7 @@ public class Main extends PApplet {
             fill(0,255,0);
             textSize(30);
             textAlign(CENTER);
-            text("GAME OVER \n Your Score is: " + xPath.size() + "\n Press ENTER", width + 275, height+75);
+            text("GAME OVER \n Your Score is: " + xPath.size() + "\n Press ENTER to Play Again", width + 275, height+75);
             if (keyCode == ENTER) {
                 xPath.clear();
                 yPath.clear();
@@ -124,16 +124,16 @@ public class Main extends PApplet {
     //KeyPressed: User interface
     public void keyPressed() {
         int newDirection;
-        if (keyCode == DOWN) {
+        if (keyCode == DOWN && direction!=1) {
             newDirection = 0;
         }
-        else if (keyCode == UP) {
+        else if (keyCode == UP && direction!=0) {
             newDirection = 1;
         }
-        else if (keyCode == RIGHT) {
+        else if (keyCode == RIGHT && direction!=3) {
             newDirection = 2;
         }
-        else if (keyCode == LEFT) {
+        else if (keyCode == LEFT && direction!=2) {
             newDirection = 3;
         }
         else {
