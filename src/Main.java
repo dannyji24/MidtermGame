@@ -40,7 +40,7 @@ public class Main extends PApplet {
     //boolean control for winning/losing
     boolean youLose = false;
 
-    double speed = 8;
+    int speed = 8;
 
     boolean youWin = false;
 
@@ -88,7 +88,7 @@ public class Main extends PApplet {
                 }
                 if (xPath.get(0) == appleX && yPath.get(0) == appleY) {
                     if (xPath.size()%5==0 && speed >= 2) {
-                        speed= speed-0.25;
+                        speed -= 1;
                     }
 
                     boolean flag = false;
