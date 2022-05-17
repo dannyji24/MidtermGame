@@ -92,8 +92,8 @@ public class Main extends PApplet {
                     }
 
                     boolean flag = false;
-                    int count=0;
                     while(flag==false){
+                        int count=0;
                         appleX = (int) random(0, width);
                         appleY = (int) random(0, height);
                         for (int i = 1; i < xPath.size(); i++) {
