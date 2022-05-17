@@ -69,12 +69,23 @@ public class Main extends PApplet {
         }
         if (!youLose) {
             fill(255,0,0);
+
+            boolean flag = false;
+            int count=0;
+            while(flag==false){
+                appleX = (int) random(0, width);
+                appleY = (int) random(0, height);
             for (int i = 1; i < xPath.size(); i++) {
+
                 if (xPath.get(i) == appleX && xPath.get(i) == appleY) {
-                    appleX = (int) random(0, width);
-                    appleY = (int) random(0, height);
+                    count++;
                 }
             }
+            if(count==0){
+                flag=true;
+            }
+            }
+
             rect(appleX*blockSize, appleY*blockSize, blockSize, blockSize);
             textAlign(LEFT);
             textSize(25);
