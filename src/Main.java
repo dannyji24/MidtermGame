@@ -40,6 +40,8 @@ public class Main extends PApplet {
     //boolean control for winning/losing
     boolean youLose = false;
 
+    int speed = 8;
+
     //Main method to run PApplet stuff
     public static void main(String[] args) {
         String[] mySketch = new String[]{"Main"};
@@ -70,10 +72,21 @@ public class Main extends PApplet {
             textSize(25);
             fill(0,0,255);
             text("Score: " + xPath.size(), 10, 10, width + 100, 50);
-            if (frameCount%10 == 0) {
+            if (frameCount%speed == 0) {
                 xPath.add(0, xPath.get(0) + xMovement[direction]);
                 yPath.add(0, yPath.get(0) + yMovement[direction]);
+                if (xPath.get(0) < 0 || yPath.get(0) < 0|| xPath.get(0) >= width || yPath.get(0) >= height) {
+                    youLose = true;
+                }
+                for (int i = 1; i < xPath.size(); i++) {
+                    if (xPath.get(0) == xPath.get(i) && yPath.get(0) == yPath.get(i)) {
+                        youLose = true;
+                    }
+                }
                 if (xPath.get(0) == appleX && yPath.get(0) == appleY) {
+                    if (xPath.size()%5==0 && speed >= 2) {
+                        speed--;
+                    }
                     appleX = (int) random(0,width);
                     appleY = (int) random(0, height);
                 }
@@ -81,6 +94,21 @@ public class Main extends PApplet {
                     xPath.remove(xPath.size()-1);
                     yPath.remove(yPath.size()-1);
                 }
+            }
+        }
+        else {
+            fill(0,255,0);
+            textSize(30);
+            textAlign(CENTER);
+            text("GAME OVER \n Your Score is: " + xPath.size() + "\n Press ENTER", width + 275, height+75);
+            if (keyCode == ENTER) {
+                xPath.clear();
+                yPath.clear();
+                xPath.add(15);
+                yPath.add(15);
+                direction = 2;
+                speed = 8;
+                youLose = false;
             }
         }
     }
