@@ -98,7 +98,7 @@ public class Main extends PApplet {
                         appleX = (int) random(0, width);
                         appleY = (int) random(0, height);
                         for (int i = 1; i < xPath.size(); i++) {
-                            if (xPath.get(i) == appleX && xPath.get(i) == appleY) {
+                            if (xPath.get(i) == appleX && yPath.get(i) == appleY) {
                                 count++;
                             }
                         }
