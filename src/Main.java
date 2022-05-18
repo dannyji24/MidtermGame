@@ -26,7 +26,7 @@ public class Main extends PApplet {
     int height = 30;
 
     //Direction of snake
-    int direction = 0;
+    int direction = 2;
 
     //Body size of the snake and apple(probably subject to change)
     int blockSize = 20;
@@ -56,12 +56,13 @@ public class Main extends PApplet {
     //Settings: basically makes the window that we run snake on
     public void settings(){
         size(600,600);
-        xPath.add(0);
+        xPath.add(10);
         yPath.add(15);
     }
 
     //Draw: makes all of the visual changes
     public void draw(){
+        boolean flag;
         background(0);
         fill(102, 255, 0);
         for (int i = 0; i < xPath.size(); i++) {
@@ -91,7 +92,7 @@ public class Main extends PApplet {
                         speed -= 1;
                     }
 
-                    boolean flag = false;
+                    flag = false;
                     while(flag==false){
                         int count=0;
                         appleX = (int) random(0, width);
@@ -121,7 +122,7 @@ public class Main extends PApplet {
             if (keyCode == ENTER) {
                 xPath.clear();
                 yPath.clear();
-                xPath.add(15);
+                xPath.add(10);
                 yPath.add(15);
                 direction = 2;
                 speed = 8;
