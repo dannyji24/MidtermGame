@@ -93,7 +93,7 @@ public class Main extends PApplet {
                     }
 
                     flag = false;
-                    while(flag==false){
+                    while(!flag){
                         int count=0;
                         appleX = (int) random(0, width);
                         appleY = (int) random(0, height);
