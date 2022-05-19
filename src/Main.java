@@ -70,15 +70,20 @@ public class Main extends PApplet {
         for (int i = 0; i < xPath.size(); i++) {
             rect(xPath.get(i)*blockSize, yPath.get(i)*blockSize, blockSize,blockSize);
         }
+
+        // score of the game
+        int score = xPath.size()-1;
+
         if (!youLose) {
             fill(255,0,0);
 
             rect(appleX*blockSize, appleY*blockSize, blockSize, blockSize);
             textAlign(LEFT);
             textSize(25);
-            fill(0,0,255);
+            fill(173,216,230);
 
-            text("Score: " + xPath.size(), 10, 10, width + 100, 50);
+
+            text("Score: " + score, 10, 10, width + 100, 50);
             if (frameCount%speed == 0) {
                 update = true;
                 xPath.add(0, xPath.get(0) + xMovement[direction]);
@@ -96,6 +101,7 @@ public class Main extends PApplet {
                         speed -= 1;
                     }
 
+                    //while loop to ensure apple does not spawn in snake
                     flag = false;
                     while(!flag){
                         int count=0;
@@ -118,11 +124,12 @@ public class Main extends PApplet {
                 }
             }
         }
+        //Settings: Sets up Game Over Screen and Play Again
         else {
-            fill(0,255,0);
+            fill(173,216,230);
             textSize(30);
             textAlign(CENTER);
-            text("GAME OVER \n Your Score is: " + xPath.size() + "\n Press ENTER to Play Again", width + 275, height+75);
+            text("GAME OVER \n Your Score is: " + score + "\n Press ENTER to Play Again", width + 275, height+75);
             if (keyCode == ENTER) {
                 xPath.clear();
                 yPath.clear();
