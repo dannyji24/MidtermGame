@@ -40,9 +40,11 @@ public class Main extends PApplet {
     //boolean control for winning/losing
     boolean youLose = false;
 
-    int speed = 8;
+    int speed = 5;
 
     boolean youWin = false;
+
+    boolean update;
 
     //Main method to run PApplet stuff
     public static void main(String[] args) {
@@ -75,8 +77,10 @@ public class Main extends PApplet {
             textAlign(LEFT);
             textSize(25);
             fill(0,0,255);
+
             text("Score: " + xPath.size(), 10, 10, width + 100, 50);
             if (frameCount%speed == 0) {
+                update = true;
                 xPath.add(0, xPath.get(0) + xMovement[direction]);
                 yPath.add(0, yPath.get(0) + yMovement[direction]);
                 if (xPath.get(0) < 0 || yPath.get(0) < 0|| xPath.get(0) >= width || yPath.get(0) >= height) {
@@ -135,17 +139,21 @@ public class Main extends PApplet {
     //KeyPressed: User interface
     public void keyPressed() {
         int newDirection;
-        if (keyCode == DOWN && direction!=1) {
+        if (keyCode == DOWN && direction!=1 && update == true) {
             newDirection = 0;
+            update = false;
         }
-        else if (keyCode == UP && direction!=0) {
+        else if (keyCode == UP && direction!=0 && update == true) {
             newDirection = 1;
+            update = false;
         }
-        else if (keyCode == RIGHT && direction!=3) {
+        else if (keyCode == RIGHT && direction!=3 && update == true) {
             newDirection = 2;
+            update = false;
         }
-        else if (keyCode == LEFT && direction!=2) {
+        else if (keyCode == LEFT && direction!=2 && update == true) {
             newDirection = 3;
+            update = false;
         }
         else {
             newDirection = -1;
