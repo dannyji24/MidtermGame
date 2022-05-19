@@ -97,7 +97,7 @@ public class Main extends PApplet {
                     }
                 }
                 if (xPath.get(0) == appleX && yPath.get(0) == appleY) {
-                    if (xPath.size()%5==0 && speed >= 2) {
+                    if (score%5==0 && speed >= 2) {
                         speed -= 1;
                     }
 
