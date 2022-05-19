@@ -26,7 +26,7 @@ public class Main extends PApplet {
     int height = 30;
 
     //Direction of snake
-    int direction = 0;
+    int direction = 2;
 
     //Body size of the snake and apple(probably subject to change)
     int blockSize = 20;
@@ -56,12 +56,13 @@ public class Main extends PApplet {
     //Settings: basically makes the window that we run snake on
     public void settings(){
         size(600,600);
-        xPath.add(0);
+        xPath.add(10);
         yPath.add(15);
     }
 
     //Draw: makes all of the visual changes
     public void draw(){
+        boolean flag;
         background(0);
         fill(102, 255, 0);
         for (int i = 0; i < xPath.size(); i++) {
@@ -69,12 +70,7 @@ public class Main extends PApplet {
         }
         if (!youLose) {
             fill(255,0,0);
-            for (int i = 1; i < xPath.size(); i++) {
-                if (xPath.get(i) == appleX && xPath.get(i) == appleY) {
-                    appleX = (int) random(0, width);
-                    appleY = (int) random(0, height);
-                }
-            }
+
             rect(appleX*blockSize, appleY*blockSize, blockSize, blockSize);
             textAlign(LEFT);
             textSize(25);
@@ -93,10 +89,24 @@ public class Main extends PApplet {
                 }
                 if (xPath.get(0) == appleX && yPath.get(0) == appleY) {
                     if (xPath.size()%5==0 && speed >= 2) {
-                        speed--;
+                        speed -= 1;
                     }
-                    appleX = (int) random(0,width);
-                    appleY = (int) random(0, height);
+
+                    flag = false;
+                    while(!flag){
+                        int count=0;
+                        appleX = (int) random(0, width);
+                        appleY = (int) random(0, height);
+                        for (int i = 1; i < xPath.size(); i++) {
+                            if (xPath.get(i) == appleX && yPath.get(i) == appleY) {
+                                count++;
+                            }
+                        }
+                        if(count==0){
+                            flag=true;
+                        }
+                    }
+
                 }
                 else {
                     xPath.remove(xPath.size()-1);
@@ -108,11 +118,11 @@ public class Main extends PApplet {
             fill(0,255,0);
             textSize(30);
             textAlign(CENTER);
-            text("GAME OVER \n Your Score is: " + xPath.size() + "\n Press ENTER", width + 275, height+75);
+            text("GAME OVER \n Your Score is: " + xPath.size() + "\n Press ENTER to Play Again", width + 275, height+75);
             if (keyCode == ENTER) {
                 xPath.clear();
                 yPath.clear();
-                xPath.add(15);
+                xPath.add(10);
                 yPath.add(15);
                 direction = 2;
                 speed = 8;
@@ -124,16 +134,16 @@ public class Main extends PApplet {
     //KeyPressed: User interface
     public void keyPressed() {
         int newDirection;
-        if (keyCode == DOWN) {
+        if (keyCode == DOWN && direction!=1) {
             newDirection = 0;
         }
-        else if (keyCode == UP) {
+        else if (keyCode == UP && direction!=0) {
             newDirection = 1;
         }
-        else if (keyCode == RIGHT) {
+        else if (keyCode == RIGHT && direction!=3) {
             newDirection = 2;
         }
-        else if (keyCode == LEFT) {
+        else if (keyCode == LEFT && direction!=2) {
             newDirection = 3;
         }
         else {
