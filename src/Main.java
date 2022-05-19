@@ -32,10 +32,10 @@ public class Main extends PApplet {
     int blockSize = 20;
 
     //x value for apple
-    int appleX = (int) random(0, width);
+    int appleX = 20;
 
     //y value for apple
-    int appleY = (int) random(0, height);
+    int appleY = 15;
 
     //boolean control for winning/losing
     boolean youLose = false;
@@ -43,6 +43,8 @@ public class Main extends PApplet {
     int speed = 8;
 
     boolean youWin = false;
+
+    boolean update;
 
     //Main method to run PApplet stuff
     public static void main(String[] args) {
@@ -75,8 +77,10 @@ public class Main extends PApplet {
             textAlign(LEFT);
             textSize(25);
             fill(0,0,255);
+
             text("Score: " + xPath.size(), 10, 10, width + 100, 50);
             if (frameCount%speed == 0) {
+                update = true;
                 xPath.add(0, xPath.get(0) + xMovement[direction]);
                 yPath.add(0, yPath.get(0) + yMovement[direction]);
                 if (xPath.get(0) < 0 || yPath.get(0) < 0|| xPath.get(0) >= width || yPath.get(0) >= height) {
@@ -124,27 +128,34 @@ public class Main extends PApplet {
                 yPath.clear();
                 xPath.add(10);
                 yPath.add(15);
+                appleX = 20;
+                appleY = 15;
                 direction = 2;
                 speed = 8;
                 youLose = false;
             }
         }
+        //
     }
 
     //KeyPressed: User interface
     public void keyPressed() {
         int newDirection;
-        if (keyCode == DOWN && direction!=1) {
+        if (keyCode == DOWN && direction!=1 && update == true) {
             newDirection = 0;
+            update = false;
         }
-        else if (keyCode == UP && direction!=0) {
+        else if (keyCode == UP && direction!=0 && update == true) {
             newDirection = 1;
+            update = false;
         }
-        else if (keyCode == RIGHT && direction!=3) {
+        else if (keyCode == RIGHT && direction!=3 && update == true) {
             newDirection = 2;
+            update = false;
         }
-        else if (keyCode == LEFT && direction!=2) {
+        else if (keyCode == LEFT && direction!=2 && update == true) {
             newDirection = 3;
+            update = false;
         }
         else {
             newDirection = -1;
