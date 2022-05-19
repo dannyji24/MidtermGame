@@ -32,10 +32,10 @@ public class Main extends PApplet {
     int blockSize = 20;
 
     //x value for apple
-    int appleX = (int) random(0, width);
+    int appleX = 20;
 
     //y value for apple
-    int appleY = (int) random(0, height);
+    int appleY = 15;
 
     //boolean control for winning/losing
     boolean youLose = false;
@@ -128,6 +128,8 @@ public class Main extends PApplet {
                 yPath.clear();
                 xPath.add(10);
                 yPath.add(15);
+                appleX = 20;
+                appleY = 15;
                 direction = 2;
                 speed = 8;
                 youLose = false;
