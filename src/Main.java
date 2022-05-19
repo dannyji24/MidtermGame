@@ -40,7 +40,7 @@ public class Main extends PApplet {
     //boolean control for winning/losing
     boolean youLose = false;
 
-    int speed = 5;
+    int speed = 8;
 
     boolean youWin = false;
 
